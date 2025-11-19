@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birlikte - Güvende Ol, Yalnız Değilsin</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Genel Stil ve Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(120deg, #fefbf8, #f5f0f8, #f8fcfd); 
+            background-size: 300% 300%;
+            animation: gradientShift 15s ease infinite alternate; 
+            color: #3a3a3a; 
+            overflow-x: hidden;
+            transition: background 0.6s ease, color 0.6s ease;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.dark {
+            background: linear-gradient(120deg, #1f2029, #292d3e, #2e3141);
+            background-size: 300% 300%;
+            animation: gradientShift 15s ease infinite alternate;
+            color: #e0e0e0;
+        }
+
+        /* Ortak Konteyner */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* Header (Ana Banner Alanı) */
+        header {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 120px 25px 100px 25px;
+            background: linear-gradient(135deg, #a7d9e7, #e0b0ff); 
+            color: white;
+            transition: background 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark header {
+            background: linear-gradient(135deg, #4d6a7a, #6c4f83);
+        }
+
+        /* Logo ve Başlık */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .logo svg {
+            width: 65px;
+            height: 65px;
+            fill: white;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        header h1 {
+            font-family: 'Lora', serif; 
+            font-size: 4rem; 
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+        }
+
+        header p {
+            font-size: 1.6rem; 
+            font-weight: 300;
+            opacity: 0.98;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        /* Hero İllüstrasyon */
+        .hero-illustration {
+            width: 280px;
+            height: 200px;
+            position: relative;
+            margin-top: 30px;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.1));
+        }
+        .hero-illustration svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0.95;
+        }
+        .hero-illustration .line {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawLine 2s ease-out forwards;
+        }
+        .hero-illustration .circle {
+            transform-origin: center;
+            animation: scaleIn 1.5s ease-out forwards 0.5s;
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Toggle Switch (Tema Değiştirici) */
+        .toggle-container {
+            position: absolute; top: 25px; right: 35px; display: flex; align-items: center; gap: 10px; cursor: pointer; z-index: 10;
+        }
+        .toggle-container input { display: none; }
+        .toggle-slider {
+            width: 55px; height: 30px; background: rgba(255, 255, 255, 0.5); border-radius: 30px; position: relative; transition: background 0.4s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .toggle-slider::before {
+            content: ""; position: absolute; width: 26px; height: 26px; top: 2px; left: 2px; background: white; border-radius: 50%; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        input:checked + .toggle-slider { background: #333; }
+        input:checked + .toggle-slider::before {
+            transform: translateX(25px); background: #a7d9e7; 
+        }
+        .toggle-container i {
+            color: white; font-size: 1.3rem;
+        }
+        body.dark .toggle-container i {
+            color: #e0e0e0;
+        }
+
+        /* Ortak Bölüm Başlığı */
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            color: #6a5acd; 
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        body.dark .section-title {
+            color: #c7b8ea;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            color: #555;
+            text-align: center;
+        }
+        body.dark .section-description {
+            color: #ccc;
+        }
+
+        /* Hakkımızda Bölümü */
+        .about-us {
+            padding: 90px 25px;
+            background: #f8f8f8; 
+            border-bottom: 1px solid #eee;
+            margin-top: -30px; 
+        }
+        body.dark .about-us {
+            background: #252836;
+            border-bottom-color: #3a3a4c;
+        }
+        .about-us p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+        }
+        body.dark .about-us p {
+            color: #d0d0d0;
+        }
+        .about-us strong {
+            color: #6a5acd;
+            font-weight: 600;
+        }
+        body.dark .about-us strong {
+            color: #e0b0ff;
+        }
+
+
+        /* Özellikler Bölümü */
+        .features-section {
+            padding: 90px 25px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            transition: all 0.4s ease;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(50px);
+            border: 1px solid #eee; 
+        }
+        body.dark .feature-card {
+            background: #2a2a3f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-color: #3a3a4c;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            border-color: #a7d9e7;
+        }
+        body.dark .feature-card:hover {
+             border-color: #6c4f83;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #a7d9e7, #e0b0ff); 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body.dark .feature-card .icon-wrapper {
+            background: linear-gradient(45deg, #4d6a7a, #6c4f83);
+        }
+
+        .feature-card .icon-wrapper i {
+            font-size: 2.2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            color: #6a5acd;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        body.dark .feature-card h3 {
+            color: #e0b0ff;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        body.dark .feature-card p {
+            color: #ccc;
+        }
+
+        /* GÜVEN ve UZMANLAR için ortak kart stili */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .trust-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-left: 5px solid #a7d9e7;
+        }
+        body.dark .trust-card {
+             background: #2a2a3f;
+             border-left-color: #6c4f83;
+        }
+        .trust-card h4 {
+            color: #6a5acd;
+            margin-bottom: 10px;
+        }
+        .trust-card i {
+            font-size: 2rem;
+            color: #e0b0ff;
+            margin-bottom: 15px;
+        }
+        /* Uzman Profilleri */
+        .expert-card {
+            background: #fdfdff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        body.dark .expert-card {
+            background: #252836;
+        }
+        .expert-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #a7d9e7;
+        }
+
+
+        /* SSS Bölümü */
+        .faq-section {
+            padding: 90px 25px;
+            background: #f8f8f8;
+        }
+        body.dark .faq-section {
+            background: #252836;
+        }
+        .faq-item {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        body.dark .faq-item {
+            background: #2a2a3f;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+        body.dark .faq-question {
+            color: #e0e0e0;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding-top: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+        .faq-answer.open {
+            max-height: 200px; 
+            padding-top: 15px;
+        }
+
+        /* Acil Yardım Kalkanı Bölümü - Özel Vurgu */
+        .emergency-section {
+            background: linear-gradient(160deg, #fce4ec, #e0f2f7); 
+            padding: 100px 25px;
+            margin-top: 50px;
+            text-align: center;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        body.dark .emergency-section {
+            background: linear-gradient(160deg, #4a2a4d, #3c4d5d);
+        }
+
+        .emergency-section::before {
+            content: ''; position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; animation: pulseLight 4s infinite alternate;
+        }
+        .emergency-section::after {
+            content: ''; position: absolute; bottom: -50px; right: -50px; width: 180px; height: 180px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; animation: pulseLight 4s infinite alternate reverse;
+        }
+
+        @keyframes pulseLight {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .emergency-section .section-title {
+            font-family: 'Lora', serif; 
+            color: #d81b60; 
+            font-size: 3rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        body.dark .emergency-section .section-title {
+            color: #ff80a0;
+        }
+
+        .emergency-section .section-description {
+            color: #4a4a4a;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        body.dark .emergency-section .section-description {
+            color: #e0e0e0;
+        }
+
+        .emergency-details {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; margin-top: 40px; position: relative; z-index: 1;
+        }
+
+        .emergency-item {
+            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); width: 280px; text-align: center; transition: transform 0.3s ease; border: 1px solid #f0f0f0; opacity: 0; transform: translateY(50px);
+        }
+        body.dark .emergency-item {
+            background: rgba(45, 45, 60, 0.9); border-color: #505065;
+        }
+
+        .emergency-item:hover { transform: translateY(-8px); }
+        .emergency-item.visible { opacity: 1; transform: translateY(0); }
+
+        .emergency-item i {
+            font-size: 2.5rem; color: #d81b60; margin-bottom: 15px;
+        }
+        body.dark .emergency-item i { color: #ff80a0; }
+
+        .emergency-item h4 {
+            font-size: 1.3rem; color: #3a3a3a; margin-bottom: 10px;
+        }
+        body.dark .emergency-item h4 { color: #e0e0e0; }
+
+        .emergency-item p {
+            font-size: 0.95rem; color: #666;
+        }
+        body.dark .emergency-item p { color: #b0b0b0; }
+
+        /* YARDIM ÇAĞRISI ANİMASYONU YENİ STİLLERİ */
+        .call-animation-container {
+            position: relative;
+            width: 100%;
+            max-width: 950px; 
+            margin: 80px auto; 
+            padding: 60px 0 70px 0; 
+            background: linear-gradient(145deg, #ffffff, #f7fafd); 
+            border-radius: 35px; 
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12); 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid rgba(240, 240, 240, 0.8); 
+            transition: all 0.5s ease; 
+        }
+        body.dark .call-animation-container {
+            background: linear-gradient(145deg, #2a2a3f, #222530);
+            border-color: rgba(60, 60, 75, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .call-animation-container h3 {
+            font-family: 'Lora', serif;
+            font-size: 2.4rem; 
+            color: #4a3875; 
+            margin-bottom: 45px; 
+            animation: fadeIn 1s ease-out;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.05); 
+        }
+        body.dark .call-animation-container h3 {
+            color: #d8c2ff; 
+        }
+
+        .animation-steps {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            gap: 40px; 
+            flex-wrap: wrap; 
+            padding: 0 30px;
+        }
+
+        .animation-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px; 
+            position: relative;
+            padding-bottom: 25px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .step-icon {
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4f0ff, #e8d0ff); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem; 
+            color: #6a5acd; 
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            position: relative;
+            z-index: 2;
+            border: 3px solid rgba(255, 255, 255, 0.5); 
+        }
+        body.dark .step-icon {
+            background: linear-gradient(135deg, #4d6a7a, #6c4f83);
+            color: #c7b8ea;
+            border-color: rgba(50, 50, 60, 0.5);
+        }
+
+        .animation-step.active .step-icon {
+            transform: scale(1.15) rotateY(15deg); 
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #a7d9e7, #e0b0ff); 
+            color: white;
+            border-color: rgba(255, 255, 255, 0.8);
+            animation: iconActivePulse 1.5s infinite alternate; 
+        }
+        body.dark .animation-step.active .step-icon {
+            background: linear-gradient(135deg, #6c4f83, #4d6a7a);
+            color: white;
+            border-color: rgba(200, 200, 200, 0.8);
+        }
+
+        @keyframes iconActivePulse {
+            0% { transform: scale(1.15) rotateY(15deg); }
+            100% { transform: scale(1.18) rotateY(15deg); }
+        }
+
+        .step-text {
+            font-size: 1.05rem; 
+            color: #4a4a4a;
+            font-weight: 500;
+            line-height: 1.6;
+            min-height: 70px; 
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+        body.dark .step-text {
+            color: #d0d0d0;
+            background: rgba(40, 40, 55, 0.8);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .animation-step.active .step-text {
+             font-weight: 600;
+             color: #6a5acd;
+             transform: translateY(-5px); 
+        }
+        body.dark .animation-step.active .step-text {
+             color: #e0b0ff;
+        }
+
+
+        .arrow-wrapper { 
+            position: absolute;
+            top: 60px; 
+            left: calc(100% + 15px); 
+            width: 60px; 
+            height: 3px;
+            background: linear-gradient(to right, #a7d9e7, #e0b0ff); 
+            z-index: 1; 
+            opacity: 0; 
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform-origin: left center;
+        }
+        body.dark .arrow-wrapper {
+            background: linear-gradient(to right, #4d6a7a, #6c4f83);
+        }
+
+        .animation-step.active + .animation-step .arrow-wrapper {
+            opacity: 1; 
+            transform: translateX(-10px); 
+            animation: arrowFlow 1.8s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        /* Ok ucu */
+        .arrow-wrapper::after {
+            content: '';
+            position: absolute;
+            right: -10px; 
+            top: -7px; 
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 15px; 
+            border-color: transparent transparent transparent #e0b0ff; 
+            transition: border-color 0.5s ease;
+        }
+        body.dark .arrow-wrapper::after {
+            border-color: transparent transparent transparent #6c4f83;
+        }
+
+        @keyframes arrowFlow {
+            0% { transform: translateX(-20px) scaleX(0.5); opacity: 0; }
+            30% { transform: translateX(0px) scaleX(1); opacity: 1; }
+            70% { transform: translateX(0px) scaleX(1); opacity: 1; }
+            100% { transform: translateX(20px) scaleX(0.5); opacity: 0; }
+        }
+
+        /* Responsive Animasyon Düzenlemesi (900px ve altı) */
+        @media (max-width: 900px) {
+            .animation-steps {
+                gap: 20px;
+            }
+            .animation-step {
+                width: 160px;
+            }
+            .arrow-wrapper {
+                left: calc(100% + 10px);
+                width: 30px;
+            }
+            .arrow-wrapper::after {
+                right: -5px;
+                border-width: 7px 0 7px 10px;
+                top: -3.5px;
+            }
+            .step-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.2rem;
+            }
+            .step-text {
+                font-size: 0.9rem;
+                min-height: 55px;
+            }
+             .call-animation-container h3 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Responsive Animasyon Düzenlemesi (768px ve altı - Dikey Akış) */
+        @media (max-width: 768px) {
+            .animation-steps {
+                flex-direction: column; 
+                align-items: center;
+                gap: 20px;
+            }
+            .animation-step {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 30px;
+            }
+            .arrow-wrapper {
+                top: auto;
+                bottom: -20px; 
+                left: 50%;
+                width: 3px; 
+                height: 40px; 
+                background: linear-gradient(to bottom, #a7d9e7, #e0b0ff);
+                transform: translateX(-50%) rotate(0deg); 
+                transform-origin: center center;
+            }
+            body.dark .arrow-wrapper {
+                background: linear-gradient(to bottom, #4d6a7a, #6c4f83);
+            }
+
+            .arrow-wrapper::after {
+                right: auto;
+                left: 50%;
+                bottom: -10px; 
+                top: auto;
+                border-width: 10px 10px 0 10px; 
+                border-color: #e0b0ff transparent transparent transparent;
+                transform: translateX(-50%);
+            }
+            body.dark .arrow-wrapper::after {
+                border-color: #6c4f83 transparent transparent transparent;
+            }
+
+            .animation-step.active + .animation-step .arrow-wrapper {
+                 transform: translateX(-50%) translateY(0);
+                 animation: arrowFlowVertical 1.8s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+             }
+
+            @keyframes arrowFlowVertical {
+                0% { transform: translateY(-20px) scaleY(0.5); opacity: 0; }
+                30% { transform: translateY(0px) scaleY(1); opacity: 1; }
+                70% { transform: translateY(0px) scaleY(1); opacity: 1; }
+                100% { transform: translateY(20px) scaleY(0.5); opacity: 0; }
+            }
+        }
+
+        /* Responsive Genel Düzenleme (480px ve altı) */
+        @media (max-width: 480px) {
+            header { padding: 80px 15px 60px 15px; }
+            header h1 { font-size: 2.2rem; }
+            header p { font-size: 1rem; margin-bottom: 30px;}
+            .section-title { font-size: 1.8rem; margin-bottom: 15px;}
+            .section-description { margin-bottom: 40px;}
+            .logo svg { width: 50px; height: 50px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .feature-card { text-align: center; }
+            .feature-card .icon-wrapper { margin: 0 auto 20px auto; }
+            .emergency-section { padding: 60px 15px; }
+            .emergency-section .section-title { font-size: 2rem; }
+            .emergency-details { flex-direction: column; align-items: center; }
+            .testimonial-card { padding: 25px; }
+            .notify-section { padding: 60px 15px; }
+            .notify-section .section-title { font-size: 2rem; }
+            .music-toggle { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
+            .toggle-container { top: 15px; right: 15px; }
+            .hero-illustration { width: 180px; height: 130px;}
+
+            /* Animasyon mobil ayarları */
+            .call-animation-container { margin: 50px auto; padding: 40px 0; border-radius: 25px;}
+            .call-animation-container h3 { font-size: 1.6rem; margin-bottom: 30px;}
+            .animation-step { max-width: 90%; }
+        }
+
+        /* GERÇEK HİKAYELER (TESTIMONIALS) TASARIM DÜZELTMESİ - YENİDEN ENTEGRE EDİLDİ */
+        .testimonials-section {
+            padding: 90px 25px; 
+            background: #fdfdfd; 
+            border-top: 1px solid #eee;
+        }
+        body.dark .testimonials-section { 
+            background: #252836; 
+            border-top-color: #3a3a4c; 
+        }
+
+        .testimonials-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); 
+            opacity: 0; 
+            transform: translateY(50px); 
+            transition: all 0.8s ease-out; 
+            text-align: left; 
+            border: 1px solid #eee;
+        }
+        body.dark .testimonial-card { 
+            background: #2a2a3f; 
+            border-color: #3a3a4c; 
+        }
+        .testimonial-card.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .testimonial-card p {
+            font-family: 'Lora', serif; 
+            font-style: italic; 
+            margin-bottom: 20px; 
+            color: #4a4a4a; 
+            font-size: 1.05rem; 
+            line-height: 1.7;
+        }
+        body.dark .testimonial-card p { 
+            color: #d0d0d0; 
+        }
+
+        .testimonial-card h4 {
+            color: #6a5acd; 
+            font-weight: 600; 
+            font-size: 1.1rem;
+        }
+        body.dark .testimonial-card h4 { 
+            color: #e0b0ff; 
+        }
+        
+        /* HABERDAR OL (NOTIFY SECTION) TASARIM DÜZELTMESİ - YENİDEN ENTEGRE EDİLDİ */
+        .notify-section {
+            background: linear-gradient(135deg, #a7d9e7, #e0b0ff); 
+            color: white; 
+            padding: 80px 25px; 
+            text-align: center; 
+            margin-top: 60px;
+        }
+        body.dark .notify-section { 
+            background: linear-gradient(135deg, #4d6a7a, #6c4f83); 
+        }
+        .notify-section .section-title {
+            color: white; 
+            margin-bottom: 20px; 
+            font-size: 2.5rem; 
+            font-family: 'Lora', serif; 
+        }
+        .notify-section .section-description {
+            color: rgba(255, 255, 255, 0.9); 
+            margin-bottom: 35px; 
+            font-size: 1.15rem;
+        }
+
+        .notify-form {
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+        }
+
+        .notify-form input[type="email"] {
+            padding: 15px 20px; 
+            width: 320px; 
+            border-radius: 10px; 
+            border: none; 
+            outline: none; 
+            font-size: 1rem; 
+            color: #333; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); 
+            transition: all 0.3s ease;
+        }
+        .notify-form input[type="email"]:focus {
+            box-shadow: 0 0 0 3px rgba(167, 217, 231, 0.5);
+        }
+
+        .notify-form button {
+            background: #6a5acd; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: background 0.3s ease, transform 0.2s ease; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .notify-form button:hover {
+            background: #5a4bba; 
+            transform: translateY(-2px);
+        }
+        body.dark .notify-form button {
+            background: #e0b0ff; 
+            color: #333;
+        }
+        body.dark .notify-form button:hover {
+            background: #c795e0;
+        }
+        
+        /* Footer */
+        footer {
+            background: #9cadc7; color: white; text-align: center; padding: 40px 25px; margin-top: 0; font-size: 0.95rem;
+        }
+        body.dark footer { background: #3e4a5d; }
+        footer p { margin-bottom: 5px; }
+        footer a { color: white; text-decoration: none; opacity: 0.8; transition: opacity 0.3s ease; }
+        footer a:hover { opacity: 1; }
+        .footer-links a { margin: 0 10px; }
+
+        /* Müzik Toggle */
+        .music-toggle {
+            position: fixed; bottom: 25px; right: 25px; background: #6a5acd; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); transition: background 0.3s ease, transform 0.2s ease; z-index: 1000; display: flex; align-items: center; justify-content: center;
+        }
+        .music-toggle:hover {
+            background: #5a4bba; transform: translateY(-3px);
+        }
+        body.dark .music-toggle {
+            background: #e0b0ff; color: #333;
+        }
+        body.dark .music-toggle:hover {
+            background: #c795e0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <label class="toggle-container">
+            <input type="checkbox" id="themeToggle">
+            <div class="toggle-slider"></div>
+            <i class="fas fa-moon"></i> 
+        </label>
+
+        <div class="logo">
+            <svg viewBox="0 0 64 64">
+                <circle cx="20" cy="22" r="8" />
+                <circle cx="44" cy="22" r="8" />
+                <path d="M12 46c2-8 12-8 20-8s18 0 20 8v6H12v-6z" />
+            </svg>
+            <h1>Birlikte</h1>
+        </div>
+        <p><strong>Güvende kalman için buradayız. Yalnız değilsin.</strong></p>
+
+        <div class="hero-illustration">
+             <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="line" d="M50 150 C100 80, 200 80, 250 150" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <circle class="circle" cx="150" cy="85" r="30" fill="white" fill-opacity="0.2" stroke="white" stroke-width="2"/>
+                <path class="line" d="M150 110 L150 55" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <circle class="circle" cx="150" cy="50" r="10" fill="white"/>
+                <path class="line" d="M90 140 Q150 110 210 140" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </header>
+    
+    <section class="about-us">
+        <div class="container">
+            <h2 class="section-title">🙏 Misyonumuz: Dayanışmayla Güçlenmek</h2>
+            <p class="section-description">
+                Türkiye'de kadınların karşılaştığı zorlukları yakından bilen bir ekip olarak, <strong>ticari bir amaç gütmeden</strong> bu uygulamayı geliştirdik. Birlikte'nin tek hedefi; her an ihtiyacınız olabilecek <strong>psikolojik desteği ve anlık güvenlik kalkanını</strong> size güvenilir bir platformda sunmaktır. <strong>Sizin güvenceniz, bizim önceliğimizdir. Biz bir topluluğuz.</strong>
+            </p>
+        </div>
+    </section>
+
+    <section class="features-section" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title" style="margin-top: 50px;">🛡️ Veri Güvenliği Taahhüdümüz</h2>
+            <div class="trust-grid">
+                <div class="trust-card" data-animation="fade-up">
+                    <i class="fas fa-lock"></i>
+                    <h4>Uçtan Uca Şifreleme</h4>
+                    <p>Verileriniz, anonimliğiniz ve kişisel bilgileriniz daima en üst düzeyde şifreleme ile korunur.</p>
+                </div>
+                <div class="trust-card" data-animation="fade-up">
+                    <i class="fas fa-user-secret"></i>
+                    <h4>%100 Anonimlik</h4>
+                    <p>Psikolojik destek ve topluluk içindeki paylaşımlarınızda kimliğiniz asla açığa çıkarılmaz.</p>
+                </div>
+                <div class="trust-card" data-animation="fade-up">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h4>Kâr Amacı Gütmez</h4>
+                    <p>Birlikte, ticari bir amaç gütmeyen, sosyal sorumluluk projesidir. Veri satışı söz konusu bile değildir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Özelliklerimiz: Güvenlik ve Destek Yanında</h2>
+            <div class="feature-grid">
+                <div class="feature-card" data-animation="fade-up">
+                    <div class="icon-wrapper"> <i class="fas fa-hand-holding-heart"></i> </div>
+                    <h3>Psikolojik Destek</h3>
+                    <p>Kendinizi yalnız hissettiğinizde, anonim kalma garantisiyle <strong>gönüllü uzmanlardan</strong> veya destek gruplarımızdan psikolojik yardım ve rehberlik alın.</p>
+                </div>
+                <div class="feature-card" data-animation="fade-up">
+                    <div class="icon-wrapper"> <i class="fas fa-shield-alt"></i> </div>
+                    <h3>Maksimum Gizlilik</h3>
+                    <p>Verileriniz şifrelidir ve asla üçüncü şahıslarla paylaşılmaz. <strong>Anonimlik ve gizlilik</strong> konusundaki politikamız en yüksek standartlardadır.</p>
+                </div>
+                <div class="feature-card" data-animation="fade-up">
+                    <div class="icon-wrapper"> <i class="fas fa-users"></i> </div>
+                    <h3>Dayanışma Topluluğu</h3>
+                    <p>Benzer deneyimler yaşayan kadınlarla bir araya gelin, birbirinize destek olun ve güçlü bir topluluğun parçası olun. Anonim ve destekleyici bir ortam.</p>
+                </div>
+                <div class="feature-card" data-animation="fade-up">
+                    <div class="icon-wrapper"> <i class="fas fa-lightbulb"></i> </div>
+                    <h3>Eğitim ve Bilgilendirme</h3>
+                    <p>Hukuki haklarınız, psikolojik direnç ve kriz yönetimi konularında güvenilir kaynaklardan güncel ve doğru bilgilere erişin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-us" style="margin-top: 0;">
+        <div class="container">
+            <h2 class="section-title">👩‍⚕️ Destek Ağımız: Gönüllü Uzmanlarımızdan Bir Kaçı</h2>
+            <p class="section-description">Psikolojik destek ekibimiz, alanında uzman, gönüllü ve etik ilkelere bağlı profesyonellerden oluşur.</p>
+            <div class="trust-grid">
+                <div class="expert-card" data-animation="fade-up">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a5acd'><circle cx='12' cy='7' r='3.5'/><path d='M17 14c-1.33-1.07-2.73-1.6-4.5-1.6H12c-1.77 0-3.17.53-4.5 1.6C5.58 15.65 4 18 4 20h16c0-2-1.58-4.35-3-6z'/></svg>" alt="Dr. Elmas Yılmaz">
+                    <h4>Dr. Elmas Yılmaz</h4>
+                    <p>Klinik Psikolog, 10 Yıl Deneyim</p>
+                    <p style="font-size: 0.9rem; color: #6a5acd;">"Dayanışma ile güçlüyüz."</p>
+                </div>
+                <div class="expert-card" data-animation="fade-up">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a5acd'><circle cx='12' cy='7' r='3.5'/><path d='M17 14c-1.33-1.07-2.73-1.6-4.5-1.6H12c-1.77 0-3.17.53-4.5 1.6C5.58 15.65 4 18 4 20h16c0-2-1.58-4.35-3-6z'/></svg>" alt="Uzm. Psk. Deniz">
+                    <h4>Uzm. Psk. Deniz Akın</h4>
+                    <p>Aile Terapisti, 8 Yıl Deneyim</p>
+                    <p style="font-size: 0.9rem; color: #6a5acd;">"Her zaman bir çıkış yolu vardır."</p>
+                </div>
+                <div class="expert-card" data-animation="fade-up">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a5acd'><circle cx='12' cy='7' r='3.5'/><path d='M17 14c-1.33-1.07-2.73-1.6-4.5-1.6H12c-1.77 0-3.17.53-4.5 1.6C5.58 15.65 4 18 4 20h16c0-2-1.58-4.35-3-6z'/></svg>" alt="Psk. Aslıhan">
+                    <h4>Psk. Aslıhan Kurt</h4>
+                    <p>Travma Uzmanı, 6 Yıl Deneyim</p>
+                    <p style="font-size: 0.9rem; color: #6a5acd;">"Güç, içeriden gelir."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">❓ Sıkça Sorulan Sorular</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        Uygulama tamamen ücretsiz mi olacak? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Evet, temel güvenlik (yardım çağrısı) ve psikolojik destek özellikleri daima ücretsiz kalacaktır. Uygulamanın amacı kâr elde etmek değil, dayanışma sağlamaktır.</p>
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        Yardım çağrısı internet bağlantısı olmadan çalışır mı? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yardım çağrısı, internetin olmadığı durumlarda dahi çalışması için **SMS** teknolojisini kullanacak şekilde tasarlanmıştır. Konum bilgisi, mümkün olan en güvenilir yolla (SMS veya WhatsApp) gönderilir.</p>
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        Psikolojik destek alırken anonimliğim nasıl korunuyor? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Destek platformumuz, kimlik bilgilerini ifşa etmeyen bir kullanıcı sistemi ile çalışır. Gönüllü uzmanlar dahi, sizin gerçek kimliğinize ulaşamaz. Tüm görüşmeler şifrelenir.</p>
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        Acil durum kişilerini kimler yönetir? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Acil durum kişilerinizi sadece ve sadece siz belirlersiniz ve bu bilgiler telefonunuzda güvenli bir şekilde saklanır. Bu kişilerin listesi bizim sunucularımızda tutulmaz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="emergency-section">
+        <div class="container">
+            <h2 class="section-title">🚨 Acil Durumda Yanında: Anında Yardım Kalkanı</h2>
+            <p class="section-description">
+                Tehlike anında panik yapmayın. Birlikte, en hızlı ve en güvenli şekilde sevdiklerinize ulaşmanız için tasarlandı. Güvenliğiniz sadece bir dokunuş uzağınızda.
+            </p>
+
+            <div class="emergency-details">
+                <div class="emergency-item" data-animation="fade-up">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Tek Tuşla Çağrı</h4>
+                    <p>Uygulama içinde önceden belirlediğiniz güvenilir kişilere tek bir hareketle anında acil durum uyarısı gönderin.</p>
+                </div>
+                <div class="emergency-item" data-animation="fade-up">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Konum Paylaşımı</h4>
+                    <p>Gönderilen yardım çağrısı otomatik olarak **gerçek zamanlı konum bilginizi** içerir. Böylece sevdikleriniz size hızla ulaşabilir.</p>
+                </div>
+                <div class="emergency-item" data-animation="fade-up">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>SMS ve WhatsApp</h4>
+                    <p>Çağrılar, internet bağlantısı gereksinimi olmaksızın (ve varsa) hem SMS hem de WhatsApp üzerinden gönderilebilir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="call-animation-container">
+        <h3>İşte Yardım Çağrısı 3 Adımda Nasıl Çalışır:</h3>
+        <div class="animation-steps">
+            <div class="animation-step active" data-step="1">
+                <div class="step-icon"><i class="fas fa-hand-pointer"></i></div>
+                <div class="step-text"><strong>1. Hızlı Dokunuş:</strong> Tehlike anında uygulamadaki panik tuşuna basarsınız.</div>
+                <div class="arrow-wrapper" style="--animation-delay: 0s;"></div>
+            </div>
+            
+            <div class="animation-step" data-step="2">
+                <div class="step-icon"><i class="fas fa-location-arrow"></i></div>
+                <div class="step-text"><strong>2. Konum Tespiti:</strong> Telefonunuz, mevcut en doğru konumunuzu anında tespit eder.</div>
+                <div class="arrow-wrapper" style="--animation-delay: 0.5s;"></div>
+            </div>
+
+            <div class="animation-step" data-step="3">
+                <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="step-text"><strong>3. Uyarı Gönderimi:</strong> Kayıtlı acil durum kişilerinize konumunuzla birlikte SMS/WhatsApp uyarısı gider.</div>
+            </div>
+        </div>
+    </div>
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">💖 Gerçekten Fayda Sağladı</h2>
+            <p class="section-description">Birlikte, sadece bir uygulama değil; hayatlara dokunan gerçek bir dayanışma ağıdır.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-animation="fade-up">
+                    <p>"Psikolojik destek kısmı, kendimi dinlenmiş ve anlaşılmış hissetmemi sağladı. Birlikte, adının hakkını veriyor."</p>
+                    <h4>— Ayşe, 27</h4>
+                </div>
+                <div class="testimonial-card" data-animation="fade-up">
+                    <p>"Acil durum mesajı bir gün **hayatımı değiştirdi**. Konumun otomatik gitmesi çok büyük bir fark yarattı. Bu uygulama umut."</p>
+                    <h4>— Elif, 31</h4>
+                </div>
+                <div class="testimonial-card" data-animation="fade-up">
+                    <p>"Gizlilik konusundaki şeffaflık ve uygulama tasarımı beni çok etkiledi. Güvenle kullanıyorum."</p>
+                    <h4>— Selin, 22</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="notify-section">
+        <div class="container">
+            <h2 class="section-title">📩 Uygulama Yayınlandığında Haberdar Ol</h2>
+            <p class="section-description">Uygulama tam olarak hazır olduğunda size e-posta ile haber verelim. **E-posta listeniz güvendedir.**</p>
+            <form onsubmit="event.preventDefault(); alert('E-posta adresin başarıyla kaydedildi 🌿. Uygulama hazır olduğunda ilk sana haber vereceğiz.');" class="notify-form">
+                <input type="email" placeholder="E-posta adresin" required />
+                <button type="submit">Kaydol</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Birlikte | Güvenle, Dayanışmayla.</p>
+        <div class="footer-links">
+            <a href="#about" style="text-decoration: underline;">Misyonumuz</a>
+            <a href="#faq" style="text-decoration: underline;">SSS</a>
+            <a href="mailto:info@birlikte.org" style="text-decoration: underline;">İletişim</a>
+            <a href="tel:183" style="text-decoration: underline;">183 Destek Hattı</a>
+        </div>
+    </footer>
+
+    <button class="music-toggle" id="musicButton">🎵</button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2023/05/04/audio_3e31d8b3f5.mp3?filename=peaceful-mind-14359.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // SSS Toggle Fonksiyonu
+        function toggleFaq(item) {
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('.fa-chevron-down, .fa-chevron-up');
+            
+            // Tüm cevapları kapat
+            document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
+                if (openAnswer !== answer) {
+                    openAnswer.style.maxHeight = 0;
+                    openAnswer.classList.remove('open');
+                    const otherIcon = openAnswer.parentElement.querySelector('.fa-chevron-up');
+                    if(otherIcon) {
+                        otherIcon.classList.remove('fa-chevron-up');
+                        otherIcon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
+
+            // Tıklanan cevabı aç/kapat
+            if (answer.classList.contains('open')) {
+                answer.style.maxHeight = 0;
+                answer.classList.remove('open');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                answer.classList.add('open');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+
+        // Scroll animations (Görünür olduğunda animasyon)
+        const animatedElements = document.querySelectorAll(".feature-card, .testimonial-card, .emergency-item, .trust-card, .expert-card");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        animatedElements.forEach(el => observer.observe(el));
+
+        // Dark mode toggle (Karanlık/Aydınlık Mod)
+        const toggle = document.getElementById("themeToggle");
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+
+        if (darkModeEnabled) {
+            document.body.classList.add("dark");
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener("change", () => {
+            const isDark = toggle.checked;
+            document.body.classList.toggle("dark", isDark);
+            localStorage.setItem('darkMode', isDark);
+        });
+
+        // Music control (Müzik Kontrolü)
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicButton");
+        let playing = false;
+
+        btn.addEventListener("click", () => {
+            if (!playing) {
+                // Müzik çalma denemesi (Tarayıcı kısıtlamaları nedeniyle hata verebilir)
+                music.play().then(() => {
+                    btn.textContent = "🔇";
+                    playing = true;
+                }).catch(error => {
+                    console.error("Müzik çalma hatası:", error);
+                    alert("Tarayıcınız otomatik müzik çalmayı engelledi. Lütfen sesi manuel olarak açın.");
+                });
+            } else {
+                music.pause();
+                btn.textContent = "🎵";
+                playing = false;
+            }
+        });
+        
+        // Yardım Çağrısı Animasyon Kontrolü (Döngüsel Geçiş)
+        const steps = document.querySelectorAll('.animation-step');
+        let currentStepIndex = 0;
+
+        function animateSteps() {
+            // Önceki adımı inaktif yap
+            steps.forEach(step => step.classList.remove('active'));
+
+            // Mevcut adımı aktif yap
+            steps[currentStepIndex].classList.add('active');
+
+            // Bir sonraki adıma geç
+            currentStepIndex = (currentStepIndex + 1) % steps.length;
+        }
+
+        // Animasyonu her 2.5 saniyede bir döngüye sok
+        setInterval(animateSteps, 2500);
+
+        // Sayfa yüklendiğinde ilk adımı başlat
+        document.addEventListener('DOMContentLoaded', () => {
+            animateSteps(); 
+        });
+    </script>
+</body>
+</html>
